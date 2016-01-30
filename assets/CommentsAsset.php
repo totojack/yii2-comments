@@ -9,7 +9,7 @@ use yii\web\View;
 
 class CommentsAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/yeesoft/yii2-comments/assets/source';
+    public $sourcePath = '@vendor/totojack/yii2-comments/assets/source';
     public $css = [
         'css/comments.css',
     ];

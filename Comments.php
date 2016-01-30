@@ -170,7 +170,7 @@ class Comments extends \yii\base\Module
         Yii::$app->i18n->translations['yii2-comments/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
-            'basePath' => '@vendor/yeesoft/yii2-comments/messages',
+            'basePath' => '@vendor/totojack/yii2-comments/messages',
             'fileMap' => [
                 'yii2-comments/comments' => 'comments.php',
             ],
