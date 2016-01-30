@@ -1,6 +1,6 @@
 # yii2-comments
 
-Comments module for Yii 2
+Comments module for Yii 2 - forked from yeesoft/yii2-comments
 =====
 
 This module allows you to easy integrate comments system into your Yii2 application.
@@ -12,13 +12,13 @@ Installation
 - Either run
 
 ```
-composer require --prefer-dist yeesoft/yii2-comments "*"
+composer require --prefer-dist totojack/yii2-comments "*"
 ```
 
 or add
 
 ```
-"yeesoft/yii2-comments": "*"
+"totojack/yii2-comments": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -26,7 +26,7 @@ to the require section of your `composer.json` file.
 - Run migrations
 
 ```php
-yii migrate --migrationPath=@vendor/yeesoft/yii2-comments/migrations/
+yii migrate --migrationPath=@vendor/totojack/yii2-comments/migrations/
 ```
 
 Configuration

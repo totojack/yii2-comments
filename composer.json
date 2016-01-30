@@ -1,11 +1,15 @@
 {
-  "name": "yeesoft/yii2-comments",
-  "description": "Comments Module For Yii2 Framework",
+  "name": "totojack/yii2-comments",
+  "description": "Comments Module For Yii2 Framework - forked from yeesoft/yii2-comments",
   "license": "Apache-2.0",
   "authors": [
     {
       "name": "Taras Makitra",
       "email": "makitrataras@gmail.com"
+    },
+    {
+      "name": "Luca Iovio",
+      "email": "luca.iovio@gmail.com"
     }
   ],
   "autoload": {
