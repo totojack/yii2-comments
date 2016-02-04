@@ -4,8 +4,8 @@ namespace yeesoft\comments\models;
 
 use yeesoft\comments\Comments;
 use Yii;
-use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "comment".
@@ -66,8 +66,8 @@ class Comment extends \yii\db\ActiveRecord
             'blameable' => [
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'user_id',
-            ]
-            
+            ],
+
         ];
     }
 
@@ -160,7 +160,7 @@ class Comment extends \yii\db\ActiveRecord
             [self::STATUS_PENDING, Comments::t('comments', 'Pending'), 'default'],
             [self::STATUS_APPROVED, Comments::t('comments', 'Approved'), 'primary'],
             [self::STATUS_SPAM, Comments::t('comments', 'Spam'), 'default'],
-            [self::STATUS_TRASH, Comments::t('comments', 'Trash'), 'default']
+            [self::STATUS_TRASH, Comments::t('comments', 'Trash'), 'default'],
         ];
     }
 
@@ -240,7 +240,7 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * Check whether comment has replies
      *
-     * @return int nubmer of replies
+     * @return int number of replies
      */
     public function isReplied()
     {
@@ -254,8 +254,19 @@ class Comment extends \yii\db\ActiveRecord
      * @param int $model_id
      * @return int
      */
-    public static function activeCount($model, $model_id = NULL)
+    public static function activeCount($model, $model_id = null)
     {
         return Comment::find()->where(['model' => $model, 'model_id' => $model_id])->active()->count();
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert) {
+            \Yii::trace('comment insert ' . print_r($this->attributes, 1));
+            // [model] => artwork
+            // [model_id] => 23
+            // [user_id] => 3
+        }
+        return parent::afterSave($insert, $changedAttributes);
     }
 }
