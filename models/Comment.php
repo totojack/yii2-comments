@@ -2,6 +2,7 @@
 
 namespace yeesoft\comments\models;
 
+use common\components\QueueNotifier;
 use yeesoft\comments\Comments;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -240,7 +241,7 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * Check whether comment has replies
      *
-     * @return int number of replies
+     * @return int nubmer of replies
      */
     public function isReplied()
     {
@@ -262,10 +263,12 @@ class Comment extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
-            \Yii::trace('comment insert ' . print_r($this->attributes, 1));
-            // [model] => artwork
-            // [model_id] => 23
-            // [user_id] => 3
+            try {
+                QueueNotifier::pushComment($this->getAttributes());
+            } catch (Exception $e) {
+                \Yii::error("error comment aftersave notification - " . $e->getMessage());
+            }
+
         }
         return parent::afterSave($insert, $changedAttributes);
     }
