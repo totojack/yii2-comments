@@ -264,7 +264,8 @@ class Comment extends \yii\db\ActiveRecord
     {
         if ($insert) {
             try {
-                QueueNotifier::pushComment($this->getAttributes());
+                $queueNotifier = new QueueNotifier();
+                $queueNotifier->pushComment($this->getAttributes());
             } catch (Exception $e) {
                 \Yii::error("error comment aftersave notification - " . $e->getMessage());
             }
