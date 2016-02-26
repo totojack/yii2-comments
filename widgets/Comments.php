@@ -47,7 +47,8 @@ class Comments extends \yii\base\Widget
                     ]);
                 }
 
-                return Yii::$app->getResponse()->redirect(Yii::$app->request->referrer);
+                Yii::$app->getResponse()->redirect(Yii::$app->request->referrer);
+                return;
             }
         }
 
