@@ -27,6 +27,8 @@ class m150706_175101_create_comment_table extends Migration
             'updated_by' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'content' => Schema::TYPE_TEXT . ' NOT NULL',
             'user_ip' => Schema::TYPE_STRING . '(15) DEFAULT NULL',
+            'is_deleted' => Schema::TYPE_BOOLEAN . ' DEFAULT 0',
+            'deleted_at' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
         ], $tableOptions);
 
         $this->createIndex('comment_model', 'comment', ['model']);
