@@ -35,7 +35,9 @@
     ?>
 <?php if (Comments::getInstance()->displayAvatar): ?>
         <div class="avatar">
-            <img src="<?=Comments::getInstance()->renderUserAvatar(Yii::$app->user->id);?>"/>
+            <a href="<?=Comments::getInstance()->renderUserUrl($model->user_id);?>">
+                <img src="<?=Comments::getInstance()->renderUserAvatar(Yii::$app->user->id);?>"/>
+            </a>
         </div>
     <?php endif;?>
     <div class="comment-fields<?=(Comments::getInstance()->displayAvatar) ? ' display-avatar' : '';?>">
