@@ -35,7 +35,7 @@
     ?>
 <?php if (Comments::getInstance()->displayAvatar): ?>
         <div class="avatar">
-            <a href="<?=Comments::getInstance()->renderUserUrl($model->user_id);?>">
+            <a href="<?=Comments::getInstance()->renderUserUrl(Yii::$app->user->id);?>">
                 <img src="<?=Comments::getInstance()->renderUserAvatar(Yii::$app->user->id);?>"/>
             </a>
         </div>
