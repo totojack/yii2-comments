@@ -19,7 +19,7 @@ class Comments extends \yii\base\Module
     /**
      * Version number of the module.
      */
-    const VERSION = '0.1-a';
+    const VERSION = '0.2';
 
     /**
      * Path to default avatar image
@@ -66,7 +66,7 @@ class Comments extends \yii\base\Module
      *
      * @var boolean
      */
-    public $onlyRegistered = FALSE;
+    public $onlyRegistered = false;
 
     /**
      * Comments order direction
@@ -108,12 +108,26 @@ class Comments extends \yii\base\Module
     public $userAvatar;
 
     /**
-     *  
+     *
+     *  Example of module settings :
+     * ~~~
+     * 'comments' => [
+     *       'class' => 'yeesoft\comments\Comments',
+     *       'userUrl' => function($user_id){
+     *           return User::getUserUrlByID($user_id);
+     *       }
+     *   ]
+     * @var string|callable
+     */
+    public $userUrl;
+
+    /**
+     *
      *
      * @var boolean
      */
-    public $displayAvatar = TRUE;
-    
+    public $displayAvatar = true;
+
     /**
      * Comments asset url
      *
@@ -153,7 +167,7 @@ class Comments extends \yii\base\Module
         'class' => 'yii\captcha\CaptchaAction',
         'minLength' => 4,
         'maxLength' => 6,
-        'offset' => 5
+        'offset' => 5,
     ];
 
     /**
@@ -197,6 +211,18 @@ class Comments extends \yii\base\Module
             return $this->userAvatar;
         } else {
             return call_user_func($this->userAvatar, $user_id);
+        }
+    }
+
+    public function renderUserUrl($user_id)
+    {
+        $this->userUrl = self::getInstance()->userUrl;
+        if ($this->userUrl === null) {
+            return '';
+        } elseif (is_string($this->userUrl)) {
+            return $this->userUrl;
+        } else {
+            return call_user_func($this->userUrl, $user_id);
         }
     }
 }
