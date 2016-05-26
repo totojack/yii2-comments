@@ -18,7 +18,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $username
  * @property string $email
  * @property integer $parent_id
- * @property integer $status
+ * @property integer $approval_status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $content
