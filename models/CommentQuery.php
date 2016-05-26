@@ -12,7 +12,7 @@ class CommentQuery extends \yii\db\ActiveQuery
 
     public function active()
     {
-        $this->andWhere(['status' => Comment::STATUS_PUBLISHED]);
+        $this->andWhere(['approval_status' => Comment::STATUS_PUBLISHED]);
         return $this;
     }
 

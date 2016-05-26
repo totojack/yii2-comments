@@ -80,7 +80,7 @@ class Comment extends \yii\db\ActiveRecord
         return [
             [['content'], 'required'],
             [['username', 'email'], 'required', 'on' => self::SCENARIO_GUEST],
-            [['created_at', 'status', 'parent_id'], 'integer'],
+            [['created_at', 'approval_status', 'parent_id'], 'integer'],
             [['content'], 'string'],
             [['username'], 'string', 'max' => 128],
             [['username', 'content'], 'string', 'min' => 4],
@@ -119,7 +119,7 @@ class Comment extends \yii\db\ActiveRecord
             'username' => Comments::t('comments', 'Username'),
             'email' => Comments::t('comments', 'E-mail'),
             'parent_id' => Comments::t('comments', 'Parent Comment'),
-            'status' => Comments::t('comments', 'Status'),
+            'approval_status' => Comments::t('comments', 'Status'),
             'created_at' => Comments::t('comments', 'Created'),
             'updated_at' => Comments::t('comments', 'Updated'),
             'content' => Comments::t('comments', 'Content'),
@@ -272,5 +272,43 @@ class Comment extends \yii\db\ActiveRecord
 
         }
         return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getActiveView()
+    {
+        return $this->hasOne(get_called_class() . 'Active', ['active_id' => 'id']);
+    }
+
+    /**
+     * Utility per verificare se un model è active
+     */
+    public function isActive()
+    {
+        return $this->getActiveView()->exists();
+    }
+
+    //getter
+    public function getIsactive()
+    {
+        return $this->isActive();
+    }
+
+    public function getPublishView()
+    {
+        return $this->hasOne(get_called_class() . 'Publish', ['publish_id' => 'id']);
+    }
+
+    /**
+     * Utility per verificare se un model è publish
+     */
+    public function isPublish()
+    {
+        return $this->getPublishView()->exists();
+    }
+
+    //getter
+    public function getIspublish()
+    {
+        return $this->isPublish();
     }
 }

@@ -32,7 +32,7 @@ class CommentsList extends \yii\base\Widget
                 'model' => $this->model,
                 'model_id' => $this->model_id,
                 'parent_id' => $this->parent_id,
-                'status' => Comment::STATUS_PUBLISHED,
+                'approval_status' => Comment::STATUS_PUBLISHED,
             ]),
             'pagination' => [
                 'pageSize' => $pageSize,
@@ -42,7 +42,7 @@ class CommentsList extends \yii\base\Widget
             'sort' => [
                 'defaultOrder' => [
                     'id' => $orderDirection,
-                ]
+                ],
             ],
         ]);
 
