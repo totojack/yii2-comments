@@ -30,7 +30,8 @@ class CommentsList extends \yii\base\Widget
         $dataProvider = new ActiveDataProvider([
 //'query' => UserProfile::find()->joinWith(['user(relation_name)'])->where(['<>','user.status',0])
             'query' => Comment::find()
-                ->joinWith('user', '`user`.`id` = `comment`.`user_id`')
+            //->joinWith('user', '`user`.`id` = `comment`.`user_id`')
+                ->innerJoinWith(['user u'])->onCondition(['u.id' => 'comment.user_id'])
                 ->where([
                     'comment.model' => $this->model,
                     'comment.model_id' => $this->model_id,
