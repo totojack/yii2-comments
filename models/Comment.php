@@ -311,4 +311,9 @@ class Comment extends \yii\db\ActiveRecord
     {
         return $this->isPublish();
     }
+
+    public function getUser()
+    {
+        return $this->hasMany(\common\models\User::className(), ['id' => 'user_id']);
+    }
 }

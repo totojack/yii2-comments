@@ -28,14 +28,12 @@ class CommentsList extends \yii\base\Widget
         $pageSize = ($this->parent_id) ? 0 : CommentsModule::getInstance()->commentsPerPage;
 
         $dataProvider = new ActiveDataProvider([
-//'query' => UserProfile::find()->joinWith(['user(relation_name)'])->where(['<>','user.status',0])
             'query' => Comment::find()
-            //->joinWith('user', '`user`.`id` = `comment`.`user_id`')
-                ->innerJoinWith(['user u'])->onCondition(['u.id' => 'comment.user_id'])
+                ->innerJoinWith(['user u'])
                 ->where([
-                    'comment.model' => $this->model,
-                    'comment.model_id' => $this->model_id,
-                    'comment.parent_id' => $this->parent_id,
+                    'model' => $this->model,
+                    'model_id' => $this->model_id,
+                    'parent_id' => $this->parent_id,
                     'comment.approval_status' => Comment::STATUS_PUBLISHED,
                 ]),
             'pagination' => [
@@ -45,7 +43,7 @@ class CommentsList extends \yii\base\Widget
             ],
             'sort' => [
                 'defaultOrder' => [
-                    'comment.id' => $orderDirection,
+                    'id' => $orderDirection,
                 ],
             ],
         ]);

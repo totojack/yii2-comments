@@ -11,12 +11,21 @@ use yii\timeago\TimeAgo;
 ?>
 <?php if (Comments::getInstance()->displayAvatar): ?>
     <div class="avatar">
+        <?php if ($model->user[0]->is_artist) { ?>
         <a href="<?=Comments::getInstance()->renderUserUrl($model->user_id);?>"><img src="<?=Comments::getInstance()->renderUserAvatar($model->user_id);?>"/></a>
+        <?php } else { ?>
+            <img src="<?=Comments::getInstance()->renderUserAvatar($model->user_id);?>"/>
+        <?php } ?>
     </div>
 <?php endif;?>
 <div class="comment-content<?=(Comments::getInstance()->displayAvatar) ? ' display-avatar' : '';?>">
     <div class="comment-header">
         <a class="author"><?=HtmlPurifier::process($model->getAuthor());?></a>
+        <a class="author">
+        <?php if ($model->user[0]->is_artist) echo '<i class="fa fa-graduation-cap orange"></i>&nbsp;';
+            if ($model->user[0]->is_owner) echo '<i class="fa fa-map-marker cyan"></i>';
+        ?>
+        </a>
         <span class="time dot-left dot-right"><?=TimeAgo::widget(['timestamp' => $model->created_at, 'language' => substr(\Yii::$app->language, 0, 2)]); //SIMONE ?></span>
     </div>
     <div class="comment-text">
