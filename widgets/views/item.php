@@ -43,7 +43,6 @@
             <?php if (!Comments::getInstance()->onlyRegistered || !Yii::$app->user->isGuest): ?>
                 <a class="reply-button" data-reply-to="<?=$model->id;?>"
                    href="#"><?=Comments::t('comments', 'Reply');?></a>
-
                 <?=ReportAbuseWidget::widget(['abuseUrl' => \Yii::$app->request->url, 'commentId' => $model->id]);?>
 
                 <!--<span class="dot-left"></span>
@@ -51,6 +50,12 @@
                 <a class="glyphicon glyphicon-thumbs-down"></a> <span>0</span><span class="dot-left"></span>
                 -->
             <?php endif;?>
+        </div>
+        <?php else: ?>
+        <div class="comment-footer">
+            <?php if (!Comments::getInstance()->onlyRegistered || !Yii::$app->user->isGuest): ?>
+                <?=ReportAbuseWidget::widget(['abuseUrl' => \Yii::$app->request->url, 'commentId' => $model->id]);?>
+<?php endif;?>
         </div>
     <?php endif;?>
 </div>
