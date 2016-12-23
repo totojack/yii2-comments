@@ -29,6 +29,7 @@ return [
     'Unapprove' => 'Rimuovi approvazione',
     'Updated' => 'Aggiornato il',
     'User ID' => 'User Id',
+    'User Banned' => 'Utente Bannato',
     'Username' => 'Username',
     'Your email' => 'La tua email',
     'Your name' => 'Il tuo nome',

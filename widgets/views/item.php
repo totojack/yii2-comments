@@ -36,7 +36,11 @@
         <span class="time dot-left dot-right"><?=TimeAgo::widget(['timestamp' => $model->created_at, 'language' => substr(\Yii::$app->language, 0, 2)]); //SIMONE ?></span>
     </div>
     <div class="comment-text">
+        <?php if ($model->user[0]->approval_status == 5) {?>
+        <?=Comments::t('comments', 'User Banned');?>
+<?php } else {?>
         <?=HtmlPurifier::process($model->content);?>
+<?php }?>
     </div>
     <?php if ($nested_level < Comments::getInstance()->maxNestedLevel): ?>
         <div class="comment-footer">
