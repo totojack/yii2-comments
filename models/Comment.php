@@ -260,6 +260,19 @@ class Comment extends \yii\db\ActiveRecord
         return Comment::find()->where(['model' => $model, 'model_id' => $model_id])->active()->count();
     }
 
+    public function beforeSave($insert)
+    {
+        if ($this->hasAttribute('content')) {
+            //check if htmlpurifier emptied content after removing dangerous text
+            if (empty(HtmlPurifier::process($this->content))) {
+                //\Yii::error("comment content purified is empty -> return false");
+                return false;
+            }
+        }
+
+        return parent::beforeSave($insert);
+    }
+
     public function afterSave($insert, $changedAttributes)
     {
         if ($insert) {
