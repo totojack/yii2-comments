@@ -7,6 +7,7 @@ use yeesoft\comments\Comments;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "comment".
