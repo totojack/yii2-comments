@@ -6,7 +6,6 @@
     use yeesoft\comments\widgets\CommentsForm;
     use yeesoft\comments\widgets\CommentsList;
     use yii\helpers\ArrayHelper;
-    use yii\helpers\HtmlPurifier;
     use yii\timeago\TimeAgo;
 
 ?>
@@ -21,7 +20,7 @@
 <?php endif;?>
 <div class="comment-content<?=(Comments::getInstance()->displayAvatar) ? ' display-avatar' : '';?>">
     <div class="comment-header">
-        <a class="author"><?=HtmlPurifier::process($model->getAuthor());?></a>
+        <a class="author"><?=\common\components\Util::secureOutput($model->getAuthor());?></a>
         <a class="author">
         <?php if ($model->user[0]->is_artist) {
                 echo '<i class="fa fa-graduation-cap orange"></i>&nbsp;';
@@ -39,7 +38,7 @@
         <?php if ($model->user[0]->approval_status == 2) {?>
         <?=Comments::t('comments', 'User Banned');?>
 <?php } else {?>
-        <?=HtmlPurifier::process($model->content);?>
+        <?=\common\components\Util::secureOutput($model->content);?>
 <?php }?>
     </div>
     <?php if ($nested_level < Comments::getInstance()->maxNestedLevel): ?>

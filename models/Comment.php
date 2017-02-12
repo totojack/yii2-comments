@@ -93,6 +93,10 @@ class Comment extends \yii\db\ActiveRecord
                 'targetAttribute' => 'username',
                 'on' => self::SCENARIO_GUEST,
             ],
+            //string purification
+            [['content', 'username', 'email'], 'filter', 'filter' => function ($value) {
+                return \common\components\Util::secureInput($value);
+            }],
         ];
     }
 
