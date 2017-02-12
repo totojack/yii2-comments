@@ -95,7 +95,7 @@ class Comment extends \yii\db\ActiveRecord
             ],
             //string purification
             [['content', 'username', 'email'], 'filter', 'filter' => function ($value) {
-                return \common\components\Util::secureInput($value);
+                return HtmlPurifier::process($value);
             }],
         ];
     }
